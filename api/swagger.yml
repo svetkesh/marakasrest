@@ -1,0 +1,160 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /product:
+    get:
+      operationId: product.read_all
+      tags:
+        - Product
+      summary: Read the entire set of product, sorted by last name
+      description: Read the entire set of product, sorted by last name
+      responses:
+        200:
+          description: Successfully read product set operation
+          schema:
+            type: array
+            items:
+              properties:
+                asin:
+                  type: string
+                  description: Asin of the product
+                title:
+                  type: string
+                  description: First name of the person
+
+  /product/{asin}:
+    get:
+      operationId: product.read_one
+      tags:
+        - Product
+      summary: Read one product
+      description: Read one product
+      parameters:
+        - name: asin
+          in: path
+          description: Id of the person to get
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read person from product data operation
+          schema:
+            type: object
+            properties:
+              asin:
+                type: string
+                description: Id of the product
+              title:
+                type: string
+                description: Title of the product
+
+# Review
+  /review:
+    get:
+      operationId: review.read_all
+      tags:
+        - Review
+      summary: Read the entire set of review, sorted by ...
+      description: Read the entire set of review, sorted by last name
+      responses:
+        200:
+          description: Successfully read review set operation
+          schema:
+            type: array
+            items:
+              properties:
+                review_id:
+                  type: integer
+                  description: Id of the review
+                title:
+                  type: string
+                  description: Title of the review
+                article:
+                  type: string
+                  description: Review body
+
+    post:
+      operationId: review.create
+      tags:
+        - Review
+      summary: Create a review
+      description: Create a new review
+      parameters:
+        - name: review
+          in: body
+          description: Review to create
+          required: True
+          schema:
+            type: object
+            properties:
+              product_asin:
+                type: string
+                description: Asin of the product
+              title:
+                type: string
+                description: Title of the review
+              article:
+                type: string
+                description: Review body
+      responses:
+        201:
+          description: Successfully created review
+          schema:
+            properties:
+
+              review_id:
+                type: integer
+                description: Id of the review
+              product_asin:
+                type: string
+                description: Asin of the product
+              title:
+                type: string
+                description: Title of the review
+              article:
+                type: string
+                description: Review body
+
+  /review/{review_id}:
+    get:
+      operationId: review.read_one
+      tags:
+        - Review
+      summary: Read one review
+      description: Read one review
+      parameters:
+        - name: review_id
+          in: path
+          description: Id of the review to get
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read person from review data operation
+          schema:
+            type: object
+            properties:
+
+              review_id:
+                type: integer
+                description: Id of the review
+              product_asin:
+                type: string
+                description: Asin of the product
+              title:
+                type: string
+                description: Title of the review
+              article:
+                type: string
+                description: Review body
