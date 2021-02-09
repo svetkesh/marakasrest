@@ -6,7 +6,7 @@ in config.py
 app.config["SQLALCHEMY_DATABASE_URI"] = sqlite_url  # or postgresql_url
 ```
 
-Run seerver with
+Run server with
 ```
 $ python api/server.py
 ```
